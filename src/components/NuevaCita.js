@@ -8,7 +8,8 @@ class NuevaCita extends Component {
       fecha: "",
       hora: "",
       sintomas: ""
-    }    
+    },
+    error: false
   }
 
   handleChange = (e) => {
@@ -20,16 +21,21 @@ class NuevaCita extends Component {
         [e.target.name]: e.target.value
       }
     })
-    /* const name = e.target.name;
-    const value = e.target.value;
+  }
 
-    this.setState((prevState) => ({
-        ...prevState,
-        cita: {
-          ...prevState.cita,
-          [name]: value
-        }
-    })) */
+  handleSubmit = e => {
+    e.preventDefault();
+
+    // extract state data
+    const { mascota, propietario, fecha, hora, sintomas } = this.state.cita;
+    
+    // validations
+    if(mascota === "" || propietario === "" || fecha === "" || hora === "" || sintomas === "") {
+      this.setState({ error: true });
+      return;
+    }
+
+    // add the new date at sate
   }
 
   render() { 
@@ -40,7 +46,7 @@ class NuevaCita extends Component {
             Llena el formulario para crear una nueva cita
           </h2>
 
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group row">
               <label htmlFor="" className="col-sm-4 col-lg-2 col-form-label">Nombre Mascota</label>
               <div className="col-sm-8 col-lg-10">
