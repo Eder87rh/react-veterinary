@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
+const stateInitial = { 
+  cita: {
+    mascota: "",
+    propietario: "",
+    fecha: "",
+    hora: "",
+    sintomas: ""
+  },
+  error: false
+}
+
 class NuevaCita extends Component {
-  state = { 
-    cita: {
-      mascota: "",
-      propietario: "",
-      fecha: "",
-      hora: "",
-      sintomas: ""
-    },
-    error: false
-  }
+  state = { ...stateInitial }
 
   handleChange = (e) => {
     console.log(e.target.name, e.target.value);
@@ -42,6 +44,9 @@ class NuevaCita extends Component {
 
     // add the new date at state
     this.props.crearNuevaCita(nuevaCita);
+
+    // Set stateInitial
+    this.setState({ ...stateInitial })
   }
 
   render() { 
