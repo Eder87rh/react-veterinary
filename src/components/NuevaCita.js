@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 
 class NuevaCita extends Component {
   state = { 
@@ -35,7 +36,12 @@ class NuevaCita extends Component {
       return;
     }
 
-    // add the new date at sate
+    // generar objeto con datos
+    const nuevaCita = {...this.state.cita};
+    nuevaCita.id = uuid();
+
+    // add the new date at state
+    this.props.crearNuevaCita(nuevaCita);
   }
 
   render() { 
